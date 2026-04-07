@@ -19,15 +19,25 @@ function Register() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/student/register/manual", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+      const res = await fetch(
+        "http://localhost:5000/api/student/register/manual",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }
+      );
 
       const data = await res.json();
+
+      if (!res.ok) {
+        // Show custom message for duplicate email
+        alert("Student is already registered");
+        return;
+      }
+
       alert("Student Registered Successfully!");
       console.log(data);
 
