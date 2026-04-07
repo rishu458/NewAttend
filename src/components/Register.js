@@ -19,7 +19,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/api/students", {
+      const res = await fetch("http://localhost:5000/api/student/register/manual", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
