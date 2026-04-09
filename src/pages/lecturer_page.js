@@ -102,6 +102,9 @@ const LecturerDashboard = () => {
     <div className="min-h-screen bg-gray-100 pb-10">
       <nav className="bg-indigo-700 text-white p-4 flex justify-between items-center shadow-md">
         <h1 className="text-xl font-bold italic">Kelaniya Attendance | Lecturer</h1>
+        <span className="mr-4 text-sm font-medium">
+            Welcome, {user?.name || 'Lecturer'}
+        </span>
         <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded hover:bg-red-600 transition">Logout</button>
       </nav>
 
