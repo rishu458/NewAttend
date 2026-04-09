@@ -8,37 +8,38 @@ const LoginPanel = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+  e.preventDefault();
+  setError('');
 
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const response = await fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-        // 1. Store the token
-        localStorage.setItem("token", data.token);
+    if (response.ok) {
+      // ✅ Matches your BE: res.status(200).json({ user, token, role });
+      localStorage.setItem("token", data.token);
+      
+      // Optional: Store user info (name, etc.) if you want to show it on the dashboard
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-        // 2. Navigate based on role
-        if (data.role === "lecturer") {
-          navigate("/lecturer-dashboard");
-        } else {
-          navigate("/student-dashboard");
-        }
+      if (data.role === "lecturer") {
+        navigate("/lecturer-dashboard");
       } else {
-        setError(data.message || 'Login failed. Please check your credentials.');
+        navigate("/student-dashboard");
       }
-    } catch (err) {
-      setError('Server error. Please try again later.');
+    } else {
+      // ✅ This will display "User not found 👤⛔" or "Invalid credentials"
+      setError(data.message);
     }
-  };
+  } catch (err) {
+    setError('Server error. Please check if your backend is running.');
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
