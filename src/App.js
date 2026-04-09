@@ -5,13 +5,13 @@ import Register from './components/Register';
 import RegisterCSV from './components/csv';
 import PasswordReset from './components/change_password';
 import LecturerRegister from './components/Lec_Register';
+import Login from './components/login_panel';
 
 
 function App() {
   return (
     <div className="App">
-      <LecturerRegister />
-
+      <Login />
     </div>
   );
 }
