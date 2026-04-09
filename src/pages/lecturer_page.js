@@ -56,20 +56,27 @@ const LecturerDashboard = () => {
         setLocation(currentLoc);
 
         try {
+          // We convert expiryMinutes to a Number here before sending to backend
+          const payload = { 
+            ...formData, 
+            expiryMinutes: Number(formData.expiryMinutes), 
+            location: currentLoc 
+          };
+
           const response = await fetch('http://localhost:5000/api/sessions/create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify({ ...formData, location: currentLoc })
+            body: JSON.stringify(payload)
           });
 
           const data = await response.json();
           if (response.ok) {
             setOtp(data.otp);
             // Set countdown based on the customized expiryMinutes
-            setTimeLeft(formData.expiryMinutes * 60); 
+            setTimeLeft(Number(formData.expiryMinutes) * 60); 
             alert("Session Created Successfully!");
           }
         } catch (error) {
@@ -102,10 +109,9 @@ const LecturerDashboard = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Create New Lecture Session</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* ... (Previous fields for Institute, Subject, Lesson Name remain the same) */}
           <div>
             <label className="block text-sm font-semibold mb-2">Institute</label>
-            <select name="institute" onChange={handleInputChange} className="w-full border p-2 rounded">
+            <select name="institute" value={formData.institute} onChange={handleInputChange} className="w-full border p-2 rounded">
               <option value="">Select Institute</option>
               <option value="FCT">FCT</option>
               <option value="InstituteA">InstituteA</option>
@@ -114,7 +120,7 @@ const LecturerDashboard = () => {
           </div>
           <div>
             <label className="block text-sm font-semibold mb-2">Subject</label>
-            <select name="subject" onChange={handleInputChange} className="w-full border p-2 rounded">
+            <select name="subject" value={formData.subject} onChange={handleInputChange} className="w-full border p-2 rounded">
               <option value="">Select Subject</option>
               <option value="Maths for CT">Maths for CT</option>
               <option value="Maths for CS">Maths for CS</option>
@@ -122,7 +128,7 @@ const LecturerDashboard = () => {
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-semibold mb-2">Lesson Name</label>
-            <input type="text" name="lessonName" placeholder="Enter lesson title" onChange={handleInputChange} className="w-full border p-2 rounded" />
+            <input type="text" name="lessonName" value={formData.lessonName} placeholder="Enter lesson title" onChange={handleInputChange} className="w-full border p-2 rounded" />
           </div>
 
           <div className="md:col-span-2">
@@ -139,20 +145,20 @@ const LecturerDashboard = () => {
 
           <div>
             <label className="block text-sm font-semibold mb-2">Date</label>
-            <input type="date" name="date" onChange={handleInputChange} className="w-full border p-2 rounded" />
+            <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full border p-2 rounded" />
           </div>
           <div className="flex gap-2">
             <div>
               <label className="block text-sm font-semibold mb-2">Start</label>
-              <input type="time" name="startTime" onChange={handleInputChange} className="w-full border p-2 rounded" />
+              <input type="time" name="startTime" value={formData.startTime} onChange={handleInputChange} className="w-full border p-2 rounded" />
             </div>
             <div>
               <label className="block text-sm font-semibold mb-2">End</label>
-              <input type="time" name="endTime" onChange={handleInputChange} className="w-full border p-2 rounded" />
+              <input type="time" name="endTime" value={formData.endTime} onChange={handleInputChange} className="w-full border p-2 rounded" />
             </div>
           </div>
 
-          {/* NEW: OTP Expiration Range UI */}
+          {/* OTP Expiration Range UI */}
           <div className="md:col-span-2 bg-indigo-50 p-4 rounded-lg border border-indigo-100">
             <div className="flex justify-between items-center mb-2">
               <label className="block text-sm font-bold text-indigo-900">OTP Expiration Time</label>
