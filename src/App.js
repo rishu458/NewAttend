@@ -7,10 +7,8 @@ import Register from './components/Register';
 import RegisterCSV from './components/csv';
 import PasswordReset from './components/change_password';
 import LecturerRegister from './components/Lec_Register';
-
-// Mock Dashboard Components (Replace these with your actual files)
-const StudentDashboard = () => <div className="p-10"><h1>Student Dashboard</h1></div>;
-const LecturerDashboard = () => <div className="p-10"><h1>Lecturer Dashboard</h1></div>;
+import StudentDashboard from './pages/student_page';
+import LecturerDashboard from './pages/lecturer_page';
 
 function App() {
   return (
@@ -30,7 +28,7 @@ function App() {
           <Route path="/reset-password" element={<PasswordReset />} />
           <Route path="/lecturer-register" element={<LecturerRegister />} />
           */}
-          
+
           {/* Catch-all: Redirect unknown paths back to Login */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
