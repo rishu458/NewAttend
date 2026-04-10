@@ -70,7 +70,7 @@ const StudentDashboard = () => {
         body: JSON.stringify({
           otp: otp,
           location: locationData, // Will be null for Online, coordinates for Physical
-          studentId: user?.id,    // Extracted from the local user object
+          studentId: user?._id || user?.id,    // Extracted from the local user object
         }),
       });
 
