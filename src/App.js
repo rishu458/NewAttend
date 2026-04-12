@@ -26,10 +26,12 @@ function App() {
           <Route path="/create-session" element={<Createsession />} />
           <Route path="/password-reset-lecturers" element={<LecPasswordReset />} />
           <Route path="/reset-password-students" element={<PasswordReset />} />
-
-          {/* Other Routes 
           <Route path="/register" element={<Register />} />
           <Route path="/register-csv" element={<RegisterCSV />} />
+
+          {/* Other Routes 
+          
+          
           
           <Route path="/lecturer-register" element={<LecturerRegister />} />
           */}

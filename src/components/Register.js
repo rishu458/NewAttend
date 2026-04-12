@@ -5,7 +5,8 @@ function Register() {
     name: "",
     studentID: "",
     email: "",
-    password: ""
+    password: "",
+    institution: ""
   });
 
   const handleChange = (e) => {
@@ -97,6 +98,16 @@ function Register() {
               name="password"
               placeholder="Password"
               value={formData.password}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="institution"
+              placeholder="Institution"
+              value={formData.institution}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />

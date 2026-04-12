@@ -86,10 +86,14 @@ const LoginPanel = () => {
             Sign In
           </button>
           <span
-           onClick={() => navigate('/password-reset-lecturers')}
+           onClick={() => navigate('/register')}
            className="text-indigo-600 hover:underline cursor-pointer"
-          >Change password for lecturere
+          >Manual
           </span>
+          <span
+            onClick={() => navigate('/register-csv')}
+            className="text-indigo-600 hover:underline cursor-pointer"
+            >     CSV</span>
         </form>
       </div>
     </div>
