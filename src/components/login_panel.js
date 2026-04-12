@@ -85,6 +85,11 @@ const LoginPanel = () => {
           >
             Sign In
           </button>
+          <span
+           onClick={() => navigate('/password-reset-lecturers')}
+           className="text-indigo-600 hover:underline cursor-pointer"
+          >Change password for lecturere
+          </span>
         </form>
       </div>
     </div>

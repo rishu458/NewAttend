@@ -42,29 +42,62 @@ const handleDelete = async (id) => {
 }
 
 //download attendance CSV
-const handleDownload = (session) => {
-  const rows = session.attendedStudents.map((id) => ({
-    studentId: id
-  }));
+const handleDownload = async (session) => {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/sessions/attendance-report/${session._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    );
 
-  const csvContent =
-    "data:text/csv;charset=utf-8," +
-    ["Student ID"]
-      .concat(rows.map(r => r.studentId))
-      .join("\n");
+    const data = await res.json();
 
-  const link = document.createElement("a");
-  link.href = encodeURI(csvContent);
-  link.download = "attendance.csv";
-  link.click();
+    if (!data.students || data.students.length === 0) {
+      alert("No students have attended this session yet.");
+      return;
+    }
+
+    // CSV headers
+    const headers = ["Student Name", "Student ID", "Email"];
+
+    // rows
+    const rows = data.students.map(s => [
+      s.name,
+      s.studentID || "N/A",
+      s.email
+    ]);
+
+    // build CSV
+    const csvContent = [
+      headers.join(","),
+      ...rows.map(row => row.join(","))
+    ].join("\n");
+
+    // download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Attendance_${session.subject}_${new Date(session.date).toLocaleDateString()}.csv`;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+  } catch (err) {
+    console.error("Download failed:", err);
+    alert("Could not generate report.");
+  }
 };
 
-  
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/');
-  };
-
+const handleLogout = () => {
+  localStorage.clear();
+  navigate('/');
+};
   
 
   return (
