@@ -125,6 +125,13 @@ const handleLogout = () => {
         >
           Logout
         </button>
+
+        <button 
+          onClick={() => navigate('/student-management')} 
+          className="bg-blue-500 px-3 py-2 rounded hover:bg-blue-600 transition"
+        >
+          Manage Students
+        </button>
       </div>
     </nav>
 

@@ -11,6 +11,7 @@ import StudentDashboard from './pages/student_page';
 import LecturerDashboard from './pages/lecturer_page';
 import Createsession from './components/create_session';
 import LecPasswordReset from './components/lecturer_password_change';
+import StudentManagement from './components/StudentManagement';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/reset-password-students" element={<PasswordReset />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register-csv" element={<RegisterCSV />} />
+          <Route path="/student-management" element={<StudentManagement />} />
 
           {/* Other Routes 
           

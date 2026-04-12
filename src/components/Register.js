@@ -48,6 +48,8 @@ function Register() {
     }
   };
 
+  const institutions = ["FCT", "InstituteA", "Institute3"];
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -103,14 +105,20 @@ function Register() {
             />
           </div>
           <div>
-            <input
-              type="text"
+            <select
               name="institution"
-              placeholder="Institution"
               value={formData.institution}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
+            >
+              <option value="">Select Institution</option>
+              {institutions.map((inst) => (
+                <option key={inst} value={inst}>
+                  {inst}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button
