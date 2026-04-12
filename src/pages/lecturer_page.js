@@ -61,13 +61,14 @@ const handleDownload = async (session) => {
     }
 
     // CSV headers
-    const headers = ["Student Name", "Student ID", "Email"];
+    const headers = ["Student Name", "Student ID", "Email","Institution"];
 
     // rows
     const rows = data.students.map(s => [
       s.name,
       s.studentID || "N/A",
-      s.email
+      s.email,
+      s.institution
     ]);
 
     // build CSV
