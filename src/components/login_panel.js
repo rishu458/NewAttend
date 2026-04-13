@@ -6,10 +6,24 @@ const LoginPanel = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
   e.preventDefault();
   setError('');
+  // Optional: Add a loading state to prevent multiple submissions
+  if (loading) return; // 🚫 prevents multiple clicks
+
+  // Input validation (optional but recommended)
+  if (!email.includes("@")) {
+    setError("Please enter a valid email address.");
+    return;
+  }
+  if (password.length < 3) {
+    setError("Password must be at least 3 characters long.");
+    return;
+  }
+  setLoading(true); // 🚀 start loading
 
   try {
     const response = await fetch('http://localhost:5000/api/login', {
@@ -34,10 +48,12 @@ const LoginPanel = () => {
       }
     } else {
       // ✅ This will display "User not found 👤⛔" or "Invalid credentials"
-      setError(data.message);
+      setError("Invalid email or password");
     }
   } catch (err) {
     setError('Server error. Please check if your backend is running.');
+  } finally {
+    setLoading(false); // 🚀 stop loading
   }
 };
 
@@ -81,9 +97,14 @@ const LoginPanel = () => {
 
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+            disabled={loading}
+            className={`w-full flex justify-center py-2 px-4 rounded-md text-sm font-medium text-white transition-colors ${
+              loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
           >
-            Sign In
+          {loading ? "Signing In..." : "Sign In"}
           </button>
           <span
            onClick={() => navigate('/register')}
@@ -93,7 +114,13 @@ const LoginPanel = () => {
           <span
             onClick={() => navigate('/register-csv')}
             className="text-indigo-600 hover:underline cursor-pointer"
-            >     CSV</span>
+            >     CSV
+            </span>
+            <span
+           onClick={() => navigate('/reset-password-students')}
+           className="text-indigo-600 hover:underline cursor-pointer"
+          >register_student
+          </span>
         </form>
       </div>
     </div>

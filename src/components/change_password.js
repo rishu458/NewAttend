@@ -7,21 +7,35 @@ function PasswordReset() {
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
+  
 
   // Generate OTP
   const handleGenerateOtp = async () => {
-    if (!email || !newPassword || !confirmPassword) {
-      alert("Please fill all fields before generating OTP");
+
+    if (loading) return;
+    // replace validation with your own rules if needed
+    if (!email.includes("@")) {
+      alert("Please enter a valid email address");
       return;
     }
-
+    if (newPassword.length < 3) {
+      alert("Password must be at least 3 characters long");
+      return;
+    }
     if (newPassword !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
+    if (!email || !newPassword || !confirmPassword) {
+      alert("Please fill all fields before generating OTP");
+      return;
+    }
+    setLoading(true);
+
     try {
-      setLoading(true);
+      
       const res = await fetch(
         "http://localhost:5000/api/student/generate-otp",
         {
@@ -35,6 +49,10 @@ function PasswordReset() {
       if (res.ok) {
         alert("OTP sent to your email!");
         setOtpSent(true);
+        setCooldown(true);
+        setTimeout(() => {
+          setCooldown(false);
+        }, 30000); // 30 second cooldown
       } else {
         alert(data.message || "Failed to generate OTP");
       }
@@ -49,6 +67,14 @@ function PasswordReset() {
   // Submit new password with OTP
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+
+    if (loading) return;
+    
+    if (!otpSent) {
+      alert("Please generate an OTP first");
+      return;
+    }
 
     if (!otp) {
       alert("Please enter the OTP sent to your email");
@@ -149,12 +175,14 @@ function PasswordReset() {
             <button
               type="button"
               onClick={handleGenerateOtp}
-              disabled={loading}
+              disabled={loading || cooldown}
               className={`flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors font-semibold ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {loading ? "Processing..." : "Generate OTP"}
+              {loading ? "Processing..." 
+              : cooldown ? "Please wait 30 seconds..." 
+              : "Generate OTP"}
             </button>
 
             {otpSent && (
