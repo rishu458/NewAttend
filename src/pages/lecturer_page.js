@@ -128,17 +128,10 @@ const handleLogout = () => {
         </button>
 
         <button 
-          onClick={() => navigate('/student-management')} 
+          onClick={() => navigate('/manage-students')} 
           className="bg-blue-500 px-3 py-2 rounded hover:bg-blue-600 transition"
         >
           Manage Students
-        </button>
-
-        <button
-          onClick={() => navigate('/choose-manual-or-csv')}
-          className="bg-yellow-500 px-3 py-2 rounded hover:bg-yellow-600 transition"
-        >
-          Register students
         </button>
       </div>
     </nav>

@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function CsvorManual({ isOpen}) {
+export default function ManagePanel({ isOpen}) {
   const navigate = useNavigate();
 
   if (!isOpen) return null;
@@ -19,10 +19,8 @@ export default function CsvorManual({ isOpen}) {
         >
           <X size={22} />
         </button>
-
-        {/* Title */}
         <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">
-          Register Students
+          Student Management
         </h2>
 
         {/* Buttons */}
@@ -30,18 +28,18 @@ export default function CsvorManual({ isOpen}) {
           
           {/* Lecturer Button */}
           <button
-            onClick={() => navigate("/register")}
-            className="w-full py-3 rounded-xl bg-red-600 text-white font-medium hover:bg-red-700 transition"
+            onClick={() => navigate("/choose-manual-or-csv")}
+            className="w-full py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
           >
-            Register Manually one by one
+            Register Students
           </button>
 
           {/* Student Button */}
           <button
-            onClick={() => navigate("/register-csv")}
+            onClick={() => navigate("/student-management")}
             className="w-full py-3 rounded-xl bg-green-600 text-white font-medium hover:bg-green-700 transition"
           >
-            Register using CSV file
+            See Students List
           </button>
 
         </div>

@@ -11,9 +11,10 @@ import StudentDashboard from './pages/student_page';
 import LecturerDashboard from './pages/lecturer_page';
 import Createsession from './components/create_session';
 import LecPasswordReset from './components/lecturer_password_change';
-import StudentManagement from './components/StudentManagement';
+import StudentManagement from './components/StudentsList';
 import PasswordResetModal from './components/Choos_password_changer';
 import CsvorManual from './components/choose_manual_or_csv';
+import ManagePanel from './components/StudentManage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/student-management" element={<StudentManagement />} />
           <Route path="/choose-password-reset" element={<PasswordResetModal isOpen={true} onClose={() => {}} />} />
           <Route path="/choose-manual-or-csv" element={<CsvorManual isOpen={true} onClose={() => {}} />} />
+          <Route path="/manage-students" element={<ManagePanel isOpen={true} onClose={() => {}}/>} />
           {/* Other Routes 
           
           
