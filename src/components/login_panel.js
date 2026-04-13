@@ -106,21 +106,10 @@ const LoginPanel = () => {
           >
           {loading ? "Signing In..." : "Sign In"}
           </button>
-          <span
-           onClick={() => navigate('/register')}
-           className="text-indigo-600 hover:underline cursor-pointer"
-          >Manual
-          </span>
-          <span
-            onClick={() => navigate('/register-csv')}
-            className="text-indigo-600 hover:underline cursor-pointer"
-            >     CSV
-            </span>
             <span
-           onClick={() => navigate('/reset-password-students')}
+           onClick={() => navigate('/choose-password-reset')}
            className="text-indigo-600 hover:underline cursor-pointer"
-          >register_student
-          </span>
+          >Forget Password?</span>
         </form>
       </div>
     </div>

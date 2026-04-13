@@ -17,7 +17,13 @@ function StudentManagement() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/student/manage?institution=${inst}`
+        `http://localhost:5000/api/student/manage?institution=${inst}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        }
       );
 
       const data = await res.json();
@@ -34,6 +40,7 @@ function StudentManagement() {
   // =========================
   const handleInstitutionChange = (e) => {
     const inst = e.target.value;
+    console.log("Selected:", inst);
     setInstitution(inst);
     fetchStudents(inst);
   };
@@ -55,6 +62,7 @@ function StudentManagement() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
           body: JSON.stringify({
             studentID,

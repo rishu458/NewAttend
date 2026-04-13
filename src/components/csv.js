@@ -34,7 +34,10 @@ function RegisterCSV() {
               "http://localhost:5000/api/student/register/manual",
               {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                  "Content-Type": "application/json",
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
                 body: JSON.stringify(student),
               }
             );

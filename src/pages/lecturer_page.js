@@ -133,6 +133,13 @@ const handleLogout = () => {
         >
           Manage Students
         </button>
+
+        <button
+          onClick={() => navigate('/choose-manual-or-csv')}
+          className="bg-yellow-500 px-3 py-2 rounded hover:bg-yellow-600 transition"
+        >
+          Register students
+        </button>
       </div>
     </nav>
 
