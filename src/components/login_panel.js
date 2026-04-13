@@ -16,7 +16,7 @@ const LoginPanel = () => {
 
   // Input validation (optional but recommended)
   if (!email.includes("@")) {
-    setError("Please enter a valid email address.");
+    setError("Please enter a valid email addresss.");
     return;
   }
   if (password.length < 3) {
