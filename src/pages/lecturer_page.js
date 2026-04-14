@@ -14,7 +14,8 @@ const LecturerDashboard = () => {
   
   const fetchSessions = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/sessions", {
+      const API_URL = process.env.REACT_APP_API_URL;
+      const res = await fetch(`${API_URL}/api/sessions`, {
         headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -31,7 +32,8 @@ const LecturerDashboard = () => {
 
 const handleDelete = async (id) => {
   if (!window.confirm("Delete this session?")) return;
-  await fetch(`http://localhost:5000/api/sessions/${id}`, {
+  const API_URL = process.env.REACT_APP_API_URL;
+  await fetch(`${API_URL}/api/sessions/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -44,8 +46,9 @@ const handleDelete = async (id) => {
 //download attendance CSV
 const handleDownload = async (session) => {
   try {
+    const API_URL = process.env.REACT_APP_API_URL;
     const res = await fetch(
-      `http://localhost:5000/api/sessions/attendance-report/${session._id}`,
+      `${API_URL}/api/sessions/attendance-report/${session._id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`

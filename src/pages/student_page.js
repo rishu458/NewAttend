@@ -6,6 +6,7 @@ const StudentDashboard = () => {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'));
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -40,7 +41,7 @@ const StudentDashboard = () => {
     try {
       // 1. Fetch session details first to check mode (Physical vs Online)
       // This assumes your backend has a route to check a session by OTP
-      const checkRes = await fetch(`http://localhost:5000/api/sessions/check/${otp}`, {
+      const checkRes = await fetch(`${API_URL}/api/sessions/check/${otp}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       
@@ -61,7 +62,7 @@ const StudentDashboard = () => {
       }
 
       // 3. Mark Attendance
-      const response = await fetch('http://localhost:5000/api/sessions/mark-attendance', {
+      const response = await fetch(`${API_URL}/api/sessions/mark-attendance`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

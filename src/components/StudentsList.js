@@ -16,8 +16,9 @@ function StudentManagement() {
     setLoading(true);
 
     try {
+      const API_URL = process.env.REACT_APP_API_URL;
       const res = await fetch(
-        `http://localhost:5000/api/student/manage?institution=${inst}`,
+        `${API_URL}/api/student/manage?institution=${inst}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -56,8 +57,9 @@ function StudentManagement() {
     if (!confirmDelete) return;
 
     try {
+      const API_URL = process.env.REACT_APP_API_URL;
       const res = await fetch(
-        "http://localhost:5000/api/student/manage",
+        `${API_URL}/api/student/manage`,
         {
           method: "PUT",
           headers: {

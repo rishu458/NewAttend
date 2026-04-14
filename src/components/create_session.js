@@ -58,7 +58,8 @@ const Createsession = () => {
             location: currentLoc 
           };
 
-          const response = await fetch('http://localhost:5000/api/sessions/create', {
+          const API_URL = process.env.REACT_APP_API_URL;
+          const response = await fetch(`${API_URL}/api/sessions/create`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

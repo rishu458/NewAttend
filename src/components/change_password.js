@@ -8,6 +8,7 @@ function PasswordReset() {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(false);
+  const API_URL = process.env.REACT_APP_API_URL;
   
 
   // Generate OTP
@@ -37,7 +38,7 @@ function PasswordReset() {
     try {
       
       const res = await fetch(
-        "http://localhost:5000/api/student/generate-otp",
+        `${API_URL}/api/student/generate-otp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -83,8 +84,9 @@ function PasswordReset() {
 
     try {
       setLoading(true);
+
       const res = await fetch(
-        "http://localhost:5000/api/student/reset-password",
+        `${API_URL}/api/student/reset-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

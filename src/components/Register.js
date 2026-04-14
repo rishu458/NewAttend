@@ -20,8 +20,9 @@ function Register() {
     e.preventDefault();
 
     try {
+      const API_URL = process.env.REACT_APP_API_URL;
       const res = await fetch(
-        "http://localhost:5000/api/student/register/manual",
+        `${API_URL}/api/student/register/manual`,
         {
           method: "POST",
           headers: {

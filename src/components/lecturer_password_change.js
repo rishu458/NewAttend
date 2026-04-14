@@ -22,8 +22,9 @@ function LecPasswordReset() {
 
     try {
       setLoading(true);
+      const API_URL = process.env.REACT_APP_API_URL;
       const res = await fetch(
-        "http://localhost:5000/api/lecturer/generate-otp",
+        `${API_URL}/api/lecturer/generate-otp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -57,8 +58,9 @@ function LecPasswordReset() {
 
     try {
       setLoading(true);
+      const API_URL = process.env.REACT_APP_API_URL;
       const res = await fetch(
-        "http://localhost:5000/api/lecturer/reset-password",
+        `${API_URL}/api/lecturer/reset-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
