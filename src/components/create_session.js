@@ -30,7 +30,7 @@ const Createsession = () => {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
     } else if (timeLeft === 0 && otp) {
-      setOtp("EXPIRED");
+      setOtp("EXPIRED ");
     }
     return () => clearInterval(timer);
   }, [timeLeft, otp]);
