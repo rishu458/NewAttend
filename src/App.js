@@ -6,7 +6,7 @@ import Login from './components/login_panel';
 import Register from './components/Register';
 import RegisterCSV from './components/csv';
 import PasswordReset from './components/change_password';
-import LecturerRegister from './components/Lec_Register';
+//import LecturerRegister from './components/Lec_Register';
 import StudentDashboard from './pages/student_page';
 import LecturerDashboard from './pages/lecturer_page';
 import Createsession from './components/create_session';
